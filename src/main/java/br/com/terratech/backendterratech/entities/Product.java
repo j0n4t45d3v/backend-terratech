@@ -1,6 +1,5 @@
 package br.com.terratech.backendterratech.entities;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,25 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "products")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class Product {
   @Id
-  @Column(unique = true, nullable = false)
-  private String cpf;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(nullable = false)
+  private Long id;
 
   @Column(nullable = false)
-  private String name;
+  private String typeProduct;
 
   @Column(nullable = false)
-  private String email;
+  private int quantity;
 
-  @Column(nullable = false)
-  private String password;
-
-  @Column(nullable = false)
-  private String birthDate;
 }

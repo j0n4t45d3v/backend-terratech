@@ -11,9 +11,18 @@ import java.util.List;
 public class UserService {
 
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
 
   public User createUser(User user) {
+    if (
+        user.getCpf() == null ||
+        user.getName() == null ||
+        user.getEmail() == null ||
+        user.getPassword() == null ||
+        user.getBirthDate() == null
+    ) {
+      return null;
+    }
     return userRepository.save((user));
   }
 
