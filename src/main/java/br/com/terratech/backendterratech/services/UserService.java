@@ -13,7 +13,7 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public User createUser(User user) {
+    public User createUser(User user) {
     if (
         user.getCpf() == null ||
         user.getName() == null ||
