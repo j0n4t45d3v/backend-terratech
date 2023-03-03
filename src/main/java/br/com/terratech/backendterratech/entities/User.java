@@ -29,4 +29,9 @@ public class User {
 
   @Column(nullable = false)
   private String birthDate;
+  @OneToOne()
+  @JoinColumn(name = "zipcode")
+  private Address address;
+
+
 }
