@@ -15,16 +15,21 @@ public class UserService {
   private UserRepository userRepository;
 
   public User createUser(User user) {
+    Optional<User> userExit = userRepository.findById(user.getCpf()); // procura o usuario no banco optional serve para caso o usuario seja nulo
+
     if (
-          user.getCpf() == null ||
-          user.getName() == null ||
-          user.getEmail() == null ||
-          user.getPassword() == null ||
-          user.getBirthDate() == null
+            userExit.isEmpty() && // verifica se o usuario não existe
+            !user.getCpf().isEmpty() &&
+            !user.getName().isEmpty() &&
+            !user.getEmail().isEmpty() &&
+            !user.getPassword().isEmpty() &&
+            user.getBirthDate() != null &&
+            user.getAddress() != null
     ) {
-      return null;
+      return userRepository.save(user);
     }
-    return userRepository.save((user));
+    return null;
+
   }
 
   public List<User> findAllUsers() {
@@ -32,24 +37,30 @@ public class UserService {
   }
 
   public void deleteUser(String cpf) {
+
     userRepository.deleteById(cpf);
   }
 
-  public void updateUser(String cpf, User updateUser) {
+  public void updateUser(String cpf, User updateUser) throws Exception {
     Optional<User> userExist = userRepository.findById(cpf);
 
     if (userExist.isPresent()) {
       User user = userExist.get();
       if (updateUser.getName() != null) {
         user.setName(updateUser.getName());
-      } else if (updateUser.getEmail() != null) {
+      }
+      if (updateUser.getEmail() != null) {
         user.setEmail(updateUser.getEmail());
-      } else if (updateUser.getPassword() != null) {
+      }
+      if (updateUser.getPassword() != null) {
         user.setPassword(updateUser.getPassword());
-      }else if (updateUser.getAddress() != null) {
+      }
+      if (updateUser.getAddress() != null) {
         user.setAddress(updateUser.getAddress());
       }
       userRepository.save(user);
+    }else{
+      throw new Exception("usuario não encontrado");
     }
   }
 }
