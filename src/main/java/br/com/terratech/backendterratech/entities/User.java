@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "users")
@@ -28,7 +32,9 @@ public class User {
   private String password;
 
   @Column(nullable = false)
-  private String birthDate;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate birthDate;
+
   @OneToOne()
   @JoinColumn(name = "zipcode")
   private Address address;

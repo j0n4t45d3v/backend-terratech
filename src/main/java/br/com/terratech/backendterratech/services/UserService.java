@@ -14,13 +14,13 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-    public User createUser(User user) {
+  public User createUser(User user) {
     if (
-        user.getCpf() == null ||
-        user.getName() == null ||
-        user.getEmail() == null ||
-        user.getPassword() == null ||
-        user.getBirthDate() == null
+          user.getCpf() == null ||
+          user.getName() == null ||
+          user.getEmail() == null ||
+          user.getPassword() == null ||
+          user.getBirthDate() == null
     ) {
       return null;
     }
@@ -31,11 +31,25 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  public void deleteUser(String cpf){
-      userRepository.deleteById(cpf);
+  public void deleteUser(String cpf) {
+    userRepository.deleteById(cpf);
   }
 
-  public void updateUser(String cpf){
-      Optional<User> user = userRepository.findById(cpf);
+  public void updateUser(String cpf, User updateUser) {
+    Optional<User> userExist = userRepository.findById(cpf);
+
+    if (userExist.isPresent()) {
+      User user = userExist.get();
+      if (updateUser.getName() != null) {
+        user.setName(updateUser.getName());
+      } else if (updateUser.getEmail() != null) {
+        user.setEmail(updateUser.getEmail());
+      } else if (updateUser.getPassword() != null) {
+        user.setPassword(updateUser.getPassword());
+      }else if (updateUser.getAddress() != null) {
+        user.setAddress(updateUser.getAddress());
+      }
+      userRepository.save(user);
+    }
   }
 }

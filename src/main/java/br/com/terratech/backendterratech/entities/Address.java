@@ -9,22 +9,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Address")
+@Table(name = "address")
 public class Address {
-    private String state;
-
-    private String city;
-    private String neighbourhood;
-    @Id
-    private String zipcode;
-
-    private String number;
-
-    private String street;
-
-
+  @Id
+  private String zipcode;
+  private String state;
+  private String city;
+  private String neighbourhood;
+  private String number;
+  private String street;
 
 }
