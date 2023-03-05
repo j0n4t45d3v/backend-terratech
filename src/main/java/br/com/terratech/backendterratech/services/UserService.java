@@ -3,6 +3,7 @@ package br.com.terratech.backendterratech.services;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepository;
+  @Autowired
+  private PasswordEncoder crypto;
 
   public User createUser(User user) {
     Optional<User> userExit = userRepository.findById(user.getCpf()); // procura o usuario no banco optional serve para caso o usuario seja nulo
@@ -26,6 +29,7 @@ public class UserService {
             user.getBirthDate() != null &&
             user.getAddress() != null
     ) {
+      user.setPassword(crypto.encode(user.getPassword()));
       return userRepository.save(user);
     }
     return null;
@@ -36,9 +40,14 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  public void deleteUser(String cpf) {
+  public void deleteUser(String cpf) throws Exception {
+    Optional<User> userExist = userRepository.findById(cpf);
 
-    userRepository.deleteById(cpf);
+    if(userExist.isPresent()){
+      userRepository.deleteById(cpf);
+    }else{
+      throw new Exception("Usuario não encontrado");
+    }
   }
 
   public void updateUser(String cpf, User updateUser) throws Exception {
@@ -53,7 +62,7 @@ public class UserService {
         user.setEmail(updateUser.getEmail());
       }
       if (updateUser.getPassword() != null) {
-        user.setPassword(updateUser.getPassword());
+        user.setPassword(crypto.encode(updateUser.getPassword()));
       }
       if (updateUser.getAddress() != null) {
         user.setAddress(updateUser.getAddress());
