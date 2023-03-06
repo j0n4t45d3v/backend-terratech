@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -39,5 +40,7 @@ public class User {
   @JoinColumn(name = "zipcode", nullable = false)
   private Address address;
 
+  @OneToMany
+  private List<Product> products;
 
 }
