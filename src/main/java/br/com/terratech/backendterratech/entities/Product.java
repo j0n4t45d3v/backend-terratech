@@ -24,7 +24,7 @@ public class Product {
   private String typeProduct;
 
   @Column(nullable = false)
-  private int quantity;
+  private Integer quantity;
 
   @ManyToOne
   private User users;
