@@ -40,7 +40,4 @@ public class User {
   @JoinColumn(name = "zipcode", nullable = false)
   private Address address;
 
-  @OneToMany
-  private List<Product> products;
-
 }

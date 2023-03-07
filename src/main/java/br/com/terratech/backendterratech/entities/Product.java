@@ -27,6 +27,7 @@ public class Product {
   private Integer quantity;
 
   @ManyToOne
-  private User users;
+  @JoinColumn(name= "cpf", nullable = false)
+  private User user;
 
 }
