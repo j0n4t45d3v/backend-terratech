@@ -1,5 +1,6 @@
 package br.com.terratech.backendterratech.services;
 
+import br.com.terratech.backendterratech.entities.Login;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,27 @@ public class UserService {
   @Autowired
   private PasswordEncoder crypto;
 
+  public String loginUser(Login login) {
+    Optional<User> userExist = userRepository.findByEmail(login.getEmail());
+    if (userExist.isPresent()) {
+      if (crypto.matches(login.getPassword(), userExist.get().getPassword())) {
+        return userExist.get().getCpf();
+      }
+    }
+    return null;
+  }
+
   public User createUser(User user) {
     Optional<User> userExit = userRepository.findById(user.getCpf()); // procura o usuario no banco optional serve para caso o usuario seja nulo
 
     if (
             userExit.isEmpty() && // verifica se o usuario não existe
-            !user.getCpf().isEmpty() &&
-            !user.getName().isEmpty() &&
-            !user.getEmail().isEmpty() &&
-            !user.getPassword().isEmpty() &&
-            user.getBirthDate() != null &&
-            user.getAddress() != null
+                    !user.getCpf().isEmpty() &&
+                    !user.getName().isEmpty() &&
+                    !user.getEmail().isEmpty() &&
+                    !user.getPassword().isEmpty() &&
+                    user.getBirthDate() != null &&
+                    user.getAddress() != null
     ) {
       user.setPassword(crypto.encode(user.getPassword()));
       return userRepository.save(user);
@@ -42,9 +53,9 @@ public class UserService {
   public void deleteUser(String cpf) throws Exception {
     Optional<User> userExist = userRepository.findById(cpf);
 
-    if(userExist.isPresent()){
+    if (userExist.isPresent()) {
       userRepository.deleteById(cpf);
-    }else{
+    } else {
       throw new Exception("Usuario não encontrado");
     }
   }
@@ -67,7 +78,7 @@ public class UserService {
         user.setAddress(updateUser.getAddress());
       }
       userRepository.save(user);
-    }else{
+    } else {
       throw new Exception("usuario não encontrado");
     }
   }

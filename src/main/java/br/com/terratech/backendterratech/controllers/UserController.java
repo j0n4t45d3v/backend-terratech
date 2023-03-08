@@ -1,5 +1,6 @@
 package br.com.terratech.backendterratech.controllers;
 
+import br.com.terratech.backendterratech.entities.Login;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,17 @@ public class UserController {
       return ResponseEntity.badRequest().build();
     }
 
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<Object> login(@RequestBody Login login){
+    String userCpf = userService.loginUser(login);
+
+    if(userCpf == null){
+      return ResponseEntity.badRequest().body("Erro");
+    }else{
+      return ResponseEntity.ok("{ 'id:"+userCpf+"}");
+    }
   }
 
   @PutMapping("/{cpf}")
