@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class BackendTerratechApplication {
+	public String PORT = System.getenv("PORT");
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendTerratechApplication.class, args);
