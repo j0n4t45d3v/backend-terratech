@@ -36,8 +36,6 @@ public class UserController {
     }catch (Exception err){
       return ResponseEntity.badRequest().build();
     }
-
-
   }
 
   @PostMapping
@@ -52,7 +50,6 @@ public class UserController {
   }
 
   @PostMapping("/login")
-
   public ResponseEntity<Object> login(@RequestBody Login login) {
     String userCpf = userService.loginUser(login);
 
