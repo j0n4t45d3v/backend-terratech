@@ -1,4 +1,4 @@
-package br.com.terratech.backendterratech.entities;
+package br.com.terratech.backendterratech.wrapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,9 +8,8 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login {
+public class Response {
 
-  private String email;
+  private String response;
 
-  private String password;
 }

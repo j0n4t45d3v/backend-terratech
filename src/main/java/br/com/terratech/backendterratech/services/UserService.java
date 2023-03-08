@@ -1,6 +1,6 @@
 package br.com.terratech.backendterratech.services;
 
-import br.com.terratech.backendterratech.entities.Login;
+import br.com.terratech.backendterratech.wrapper.Login;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
