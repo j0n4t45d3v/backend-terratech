@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -25,6 +26,18 @@ public class UserController {
     } catch (Exception err) {
       return ResponseEntity.badRequest().build();
     }
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Optional<User>> findById(@PathVariable("id") String id){
+    try{
+      Optional<User> userBuscado = userService.findById(id);
+      return ResponseEntity.ok(userBuscado);
+    }catch (Exception err){
+      return ResponseEntity.badRequest().build();
+    }
+
+
   }
 
   @PostMapping

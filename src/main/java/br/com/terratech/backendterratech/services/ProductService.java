@@ -1,6 +1,7 @@
 package br.com.terratech.backendterratech.services;
 
 import br.com.terratech.backendterratech.entities.Product;
+import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class ProductService {
   public List<Product> findAllProducts(){
     return productRepository.findAll();
   }
+
+
 
   public void updatedProduct(Product updatedProduct, Long id) throws Exception{
     Optional<Product> productExist = productRepository.findById(id);

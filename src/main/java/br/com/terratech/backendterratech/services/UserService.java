@@ -49,6 +49,11 @@ public class UserService {
   public List<User> findAllUsers() {
     return userRepository.findAll();
   }
+  public Optional<User> findById(String id){
+    Optional<User> userBuscado = userRepository.findById(id);
+
+    return userBuscado;
+  }
 
   public void deleteUser(String cpf) throws Exception {
     Optional<User> userExist = userRepository.findById(cpf);
