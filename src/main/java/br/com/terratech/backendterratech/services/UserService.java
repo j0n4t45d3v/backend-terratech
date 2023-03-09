@@ -18,14 +18,14 @@ public class UserService {
   @Autowired
   private PasswordEncoder crypto;
 
-  public String loginUser(Login login) {
+  public Optional<User> loginUser(Login login) {
     Optional<User> userExist = userRepository.findByEmail(login.getEmail());
     if (userExist.isPresent()) {
       if (crypto.matches(login.getPassword(), userExist.get().getPassword())) {
-        return userExist.get().getCpf();
+        return userExist;
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public User createUser(User user) {

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class UserController {
 
@@ -52,12 +51,12 @@ public class UserController {
 
   @PostMapping("/login")
   public ResponseEntity<Object> login(@RequestBody Login login) {
-    String userCpf = userService.loginUser(login);
+    Optional<User> userCpf = userService.loginUser(login);
 
-    if (userCpf == null) {
+    if (userCpf.isEmpty()) {
       return ResponseEntity.badRequest().body(new Response("Erro"));
     } else {
-      return ResponseEntity.ok(new Response(userCpf));
+      return ResponseEntity.ok(userCpf);
     }
   }
 
