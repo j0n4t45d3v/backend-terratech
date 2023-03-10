@@ -31,8 +31,8 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<Optional<User>> findById(@PathVariable("id") String id){
     try{
-      Optional<User> userBuscado = userService.findById(id);
-      return ResponseEntity.ok(userBuscado);
+      Optional<User> userExist = userService.findById(id);
+      return ResponseEntity.ok(userExist);
     }catch (Exception err){
       return ResponseEntity.badRequest().build();
     }

@@ -51,9 +51,6 @@ public class UserService {
   }
   public Optional<User> findById(String id){
     Optional<User> userBuscado = userRepository.findById(id);
-
-
-
     return userBuscado;
   }
 
