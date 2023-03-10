@@ -50,8 +50,8 @@ public class UserService {
     return userRepository.findAll();
   }
   public Optional<User> findById(String id){
-    Optional<User> userBuscado = userRepository.findById(id);
-    return userBuscado;
+    Optional<User> userExist = userRepository.findById(id);
+    return userExist;
   }
 
   public void deleteUser(String cpf) throws Exception {
