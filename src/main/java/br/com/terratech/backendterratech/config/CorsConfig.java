@@ -12,24 +12,18 @@ public class CorsConfig implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
-            .allowedOrigins("*")
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedHeaders("Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
-            .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-            .allowCredentials(false);
-
-    /* registry.addMapping("/**")
-            .allowedOrigins("https://terratech.vercel.app")
+            .allowedOrigins("https://localhost:3000/")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedHeaders("Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
             .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
             .allowCredentials(false);
 
     registry.addMapping("/**")
-            .allowedOrigins("http://127.0.0.1:5500/")
+            .allowedOrigins("https://terratech.vercel.app")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedHeaders("Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
             .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-            .allowCredentials(false);*/
+            .allowCredentials(false);
+
   }
 }

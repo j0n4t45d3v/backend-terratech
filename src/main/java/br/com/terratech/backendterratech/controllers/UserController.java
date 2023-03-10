@@ -38,7 +38,7 @@ public class UserController {
     }
   }
 
-  @PostMapping
+  @PostMapping("/register")
   public ResponseEntity<User> create(@RequestBody User user) {
     User created = userService.createUser(user);
     if (created != null) {
