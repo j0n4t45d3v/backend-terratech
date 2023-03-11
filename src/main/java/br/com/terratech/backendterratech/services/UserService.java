@@ -1,5 +1,6 @@
 package br.com.terratech.backendterratech.services;
 
+import br.com.terratech.backendterratech.repositories.AddressRepository;
 import br.com.terratech.backendterratech.wrapper.Login;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.UserRepository;
@@ -15,6 +16,8 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepository;
+  @Autowired
+  private AddressRepository addressRepository;
   @Autowired
   private PasswordEncoder crypto;
 
@@ -40,6 +43,9 @@ public class UserService {
                     user.getBirthDate() != null &&
                     user.getAddress() != null
     ) {
+
+      addressRepository.save(user.getAddress());
+
       user.setPassword(crypto.encode(user.getPassword()));
       return userRepository.save(user);
     }
@@ -50,8 +56,7 @@ public class UserService {
     return userRepository.findAll();
   }
   public Optional<User> findById(String id){
-    Optional<User> userExist = userRepository.findById(id);
-    return userExist;
+    return  userRepository.findById(id);
   }
 
   public void deleteUser(String cpf) throws Exception {
