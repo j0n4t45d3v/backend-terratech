@@ -15,10 +15,4 @@ public class BackendTerratechApplication {
 		SpringApplication.run(BackendTerratechApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder getPasswordEncoder(){
-		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
-		return encode;
-	}
-
 }
