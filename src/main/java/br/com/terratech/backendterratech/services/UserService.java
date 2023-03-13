@@ -18,15 +18,16 @@ public class UserService {
   private UserRepository userRepository;
   @Autowired
   private AddressRepository addressRepository;
-  @Autowired
-  private PasswordEncoder crypto;
+//  @Autowired
+//  private PasswordEncoder crypto;
 
   public Optional<User> loginUser(Login login) {
     Optional<User> userExist = userRepository.findByEmail(login.getEmail());
     if (userExist.isPresent()) {
-      if (crypto.matches(login.getPassword(), userExist.get().getPassword())) {
-        return userExist;
-      }
+//      if (crypto.matches(login.getPassword(), userExist.get().getPassword())) {
+//
+//      }
+      return userExist;
     }
     return Optional.empty();
   }
@@ -46,7 +47,7 @@ public class UserService {
 
       addressRepository.save(user.getAddress());
 
-      user.setPassword(crypto.encode(user.getPassword()));
+//      user.setPassword(crypto.encode(user.getPassword()));
       return userRepository.save(user);
     }
     return null;
@@ -81,7 +82,7 @@ public class UserService {
         user.setEmail(updateUser.getEmail());
       }
       if (updateUser.getPassword() != null) {
-        user.setPassword(crypto.encode(updateUser.getPassword()));
+        user.setPassword(updateUser.getPassword());
       }
       if (updateUser.getAddress() != null) {
         user.setAddress(updateUser.getAddress());
