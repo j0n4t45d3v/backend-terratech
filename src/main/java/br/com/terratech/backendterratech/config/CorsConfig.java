@@ -19,9 +19,13 @@ public class CorsConfig implements WebMvcConfigurer {
 //            .allowCredentials(false);
 
     registry.addMapping("/**")
-            .allowedOrigins("https://terratech.vercel.app", "https://terratech.netlify.app/")
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedHeaders("Access-Control-Allow-Origin", "Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Allow-Method", "Access-Control-Allow-Headers")
-            .allowCredentials(false);
+//            .allowedOrigins("https://terratech.vercel.app", "https://terratech.netlify.app/")
+//            .allowedMethods("GET", "POST", "PUT", "DELETE")
+//            .allowedHeaders("Access-Control-Allow-Origin", "Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Allow-Method", "Access-Control-Allow-Headers")
+//            .allowCredentials(false);
+              .allowedOrigins("*")
+              .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
+              .allowCredentials(true)
+              .maxAge(3600);
   }
 }
