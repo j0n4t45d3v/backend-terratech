@@ -17,7 +17,7 @@ public class CorsConfig implements WebMvcConfigurer {
 //            .allowedHeaders("Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
 //            .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
 //            .allowCredentials(false);
-
+    // Allowed Origins *
     registry.addMapping("/**")
 //            .allowedOrigins("https://terratech.vercel.app", "https://terratech.netlify.app/")
 //            .allowedMethods("GET", "POST", "PUT", "DELETE")
