@@ -3,6 +3,7 @@ package br.com.terratech.backendterratech.controllers;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.services.UserService;
 import br.com.terratech.backendterratech.wrapper.Login;
+import br.com.terratech.backendterratech.wrapper.RegisterUser;
 import br.com.terratech.backendterratech.wrapper.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<User> create(@RequestBody User user) {
+  public ResponseEntity<Object> create(@RequestBody RegisterUser user) {
     User created = userService.createUser(user);
     if (created != null) {
       return ResponseEntity.ok(user);

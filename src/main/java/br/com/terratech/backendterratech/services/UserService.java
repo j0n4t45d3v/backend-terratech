@@ -4,6 +4,7 @@ import br.com.terratech.backendterratech.repositories.AddressRepository;
 import br.com.terratech.backendterratech.wrapper.Login;
 import br.com.terratech.backendterratech.entities.User;
 import br.com.terratech.backendterratech.repositories.UserRepository;
+import br.com.terratech.backendterratech.wrapper.RegisterUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class UserService {
     return Optional.empty();
   }
 
-  public User createUser(User user) {
+  public User createUser(RegisterUser user) {
     Optional<User> userExit = userRepository.findById(user.getCpf()); // procura o usuario no banco optional serve para caso o usuario seja nulo
 
     if (
@@ -42,13 +43,16 @@ public class UserService {
                     !user.getEmail().isEmpty() &&
                     !user.getPassword().isEmpty() &&
                     user.getBirthDate() != null &&
-                    user.getAddress() != null
+                    user.getAddress() != null  &&
+                    user.getPassword().equals(user.getConfirmPassword())
     ) {
 
       addressRepository.save(user.getAddress());
 
+      User register = new User(user.getCpf(), user.getName(), user.getEmail(), user.getPassword(), user.getBirthDate(), user.getAddress());
+
 //      user.setPassword(crypto.encode(user.getPassword()));
-      return userRepository.save(user);
+      return userRepository.save(register);
     }
     return null;
   }
